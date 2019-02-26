@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign Up</title>
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+</head>
+<body>
+   <div class="sign_up col-md-4 col-md-offset-4">
+
+      <!-- Start sign_up_form -->
+	  <div class="sign_up_form">
+			 <form method="POST">
+			  <div class="form-row">
+			  	<div class="col">
+			  		<h2>Create Account</h2>
+			  	</div>
+			    <div class="col" style="width: 45%;float: left; margin-right: 5%">
+			      <input type="text" class="form-control" placeholder="First name" name="first_name" maxlength="20" minlength="3">
+			      <div class="error first_name">error</div>
+			    </div>
+			    <div class="col" style="width: 50%;display: inline-block;">
+			      <input type="text" class="form-control" placeholder="Last name" name="last_name"  maxlength="20" minlength="3">
+			      <div class="error last_name">error</div>
+			    </div>
+
+                <div class="col">
+                 <label>country</label>
+			     <select name="country">
+			     	<option>....</option>
+			     	<option value="">Egypt</option>
+			     	<option>syria</option>
+
+			     </select>
+			     <div class="error country">error</div>
+			    </div>
+
+			     <div class="col">
+                 <label>gender</label>
+			     <select name="gender">
+			     	<option>...</option>
+			     	<option value="male">Male</option>
+			     	<option value="female">Female</option>
+			     </select>
+			     <div class="error gender">error</div>
+			    </div>
+
+			    <div class="col">
+			      <input type="email" class="form-control" placeholder="Email" name="email" maxlength="100" minlength="15">
+			      <div class="error email">error</div>
+			    </div>
+
+                <div class="col">
+			      <input type="password" class="form-control" placeholder="Password" name="password" maxlength="100" minlength="6">
+			      <div class="error password">error</div>
+			    </div>
+
+			    <div class="col">
+			      <input type="password" class="form-control" placeholder="Confirm password" name="confirm_password">
+			      <div class="error confirm_password">error</div>
+			    </div>
+                <div class="col">
+                	<button type="button" class="btn btn-primary" name="sign_up">Sign Up</button>
+                </div>
+			  </div>
+			</form>
+
+	  </div> <!-- End sign_up_form -->
+
+   </div>  <!-- End sign_Up -->
+
+<script type="text/javascript" src="../js/main.js"></script>
+
+</body>
+</html>
