@@ -216,8 +216,3 @@ if(isset($_POST['email']) && isset($_POST['password']))
         
 }
 ?>
-<form action ="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-	<input type="text" name="email" placeholder="email">
-	<input type="text" name="password" placeholder="password">
-	<input type="submit" value="login">
-</form>
