@@ -334,15 +334,3 @@ class sign_up
             echo  $output[0] . ":" . $output[1];
     }
 ?>
-
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-	<input type="text" name="first_name" placeholder="first name">
-	<input type="text" name="last_name" placeholder="last name"><br>
-	<input type="text" name="email" placeholder="email"><br>
-	<input type="text" name="password" placeholder="password"><br>
-	<input type="text" name="year" placeholder="year">
-	<input type="text" name="month" placeholder="month">
-	<input type="text" name="day" placeholder="day"><br>
-	<input type="text" name="sex" placeholder="six"><br><br>
-	<input type="submit" value="check">
-</form>
