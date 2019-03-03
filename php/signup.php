@@ -339,7 +339,7 @@ class sign_up
  * by this sort first_name , last_name , email , password
  *
  */
-    if(isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['repassword'])  && isset($_POST['gender']) && isset($_POST['country']))
+    if(isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm_password'])  && isset($_POST['gender']) && isset($_POST['country']))
     {
         //$birthday = $_POST['year'] . "-" .$_POST['month'] . "-" . $_POST['day'];
         $username = $_POST['email'];
@@ -347,7 +347,7 @@ class sign_up
         $sign_up = new sign_up("localhost" , "root" , "" , "project");
 
         
-        $output =  $sign_up->start_sign_up($_POST['first_name'] , $_POST['last_name'] , $username , $_POST['password'] ,$_POST['repassword'] , $_POST['gender'] , $_POST['country']);
+        $output =  $sign_up->start_sign_up($_POST['first_name'] , $_POST['last_name'] , $username , $_POST['password'] ,$_POST['confirm_password'] , $_POST['gender'] , $_POST['country']);
         if($output[0] == "done")
         {
             session_start();
