@@ -58,7 +58,7 @@ sign_up[0].onclick = function(evt){
 	}// end if is set response
   }//onchange
 	let dataForm = new FormData(document.forms[0]);
-	ajaxRequest.open('POST','/project/php/sign_up.php',true);
+	ajaxRequest.open('POST','/project/php/signup.php',true);
 	ajaxRequest.send(dataForm);
 }//end button
 
