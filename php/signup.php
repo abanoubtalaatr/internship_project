@@ -307,7 +307,8 @@ class sign_up
     }
     public function get_id($email)
     {
-        if($this->is_email($email, "gmail.com") || $this->is_phone_number($email, "yahoo.com"))
+        $id = 0;
+        if($this->is_email($email, "gmail.com") || $this->is_email($email, "yahoo.com"))
         {
             $id_res = $this->con->query('SELECT id FROM signup WHERE email ="' . $email . '"');
             if($id_res->num_rows > 0)
@@ -341,6 +342,7 @@ class sign_up
  */
     if(isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm_password'])  && isset($_POST['gender']) && isset($_POST['country']))
     {
+        
         //$birthday = $_POST['year'] . "-" .$_POST['month'] . "-" . $_POST['day'];
         $username = $_POST['email'];
 

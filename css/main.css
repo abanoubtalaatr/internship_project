@@ -1,103 +1,203 @@
-
 /*
 	this is the rule we should work on it like :
 	1- any class you will name it you should make prefix for this class by the name of the file example(sign_up_contain)
 	sign_up is the prefix is the name of the file and followed by your class
 */
-*{
-	/* this for make style profissional */
-	box-sizing: border-box;
-}
+* {
+  /* this for make style profissional */
+  box-sizing: border-box; }
+
 /*
 sign_up.html 
 
 # this for style sign_up form to make any person can maintain on this page easy 
 
 */
-.warning{
-	border:2px solid red !important;
-}
-.error{
-	color:orangered;
-	text-transform: capitalize;
-	padding-top: 8px;
-	display: none;
-	
-}
-.sign_up{
-   margin-top: 50px;
-   background: #031641;
-   border-radius: 3px;
+.warning {
+  border: 2px solid red !important; }
+
+.error {
+  color: orangered;
+  text-transform: capitalize;
+  padding-top: 8px;
+  display: none; }
+
+.sign_up {
+  margin-top: 50px;
+  background: #031641;
+  border-radius: 3px;
   animation: appear 1s linear;
   transition-delay: 1s;
- transition: all 1s ease;
+  transition: all 1s ease; }
 
-   
-}
+.sign_up .sign_up_form {
+  padding: 10px; }
 
-.sign_up .sign_up_form{
-	
-	padding: 10px;
-
-	
-}
-.sign_up .sign_up_form .form-row .col h2{
+.sign_up .sign_up_form .form-row .col h2 {
   margin-top: 5px;
   margin-bottom: 20px;
-   text-align: center;
-   color: white;
-}
-.sign_up .sign_up_form .form-row .col label{
-	width: 50%;
-    color: white;
-    text-transform: capitalize;
-    font-weight: 100;
-    padding: 2px 0px;
-      
-}
+  text-align: center;
+  color: white; }
 
-.sign_up .sign_up_form .form-row .col select{
-	  width: 48%;
-    border: none;
-    padding: 2px;
-    border-radius: 3px;
-}
+.sign_up .sign_up_form .form-row .col label {
+  width: 50%;
+  color: white;
+  text-transform: capitalize;
+  font-weight: 100;
+  padding: 2px 0px; }
+
+.sign_up .sign_up_form .form-row .col select {
+  width: 48%;
+  border: none;
+  padding: 2px;
+  border-radius: 3px; }
+
 .sign_up .sign_up_form .form-row .col:not(:first-of-type) {
-    margin-top: 15px;
-        
-}
-.sign_up .sign_up_form .form-row .col:last-of-type{
-	width: 25%;
-    margin: auto;
-    margin-top: 15px;
-}
-.sign_up .sign_up_form .form-row .col:last-of-type button{
-	width: 100%;
-	border: none;
-	outline: none;
-}
-@keyframes appear{
-	0%{
-		opacity: 0;
-		transform: translateY(10px);
-	}
-	25%{
-		opacity: .5;
-		transform: translateY(-10px);
-	}
-	50%{
-		opacity: .8;
-		transform: translateY(10px);
-	}
-	75%{
-		opacity: 1;
-		transform: translateY(-10px);
-	}
-	100%{
-		opacity: 1;
-		transform: translateY(10px);
-	}
+  margin-top: 15px; }
 
+.sign_up .sign_up_form .form-row .col:last-of-type {
+  width: 25%;
+  margin: auto;
+  margin-top: 15px; }
 
-}
+.sign_up .sign_up_form .form-row .col:last-of-type button {
+  width: 100%;
+  border: none;
+  outline: none; }
 
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(10px); }
+  25% {
+    opacity: .5;
+    transform: translateY(-10px); }
+  50% {
+    opacity: .8;
+    transform: translateY(10px); }
+  75% {
+    opacity: 1;
+    transform: translateY(-10px); }
+  100% {
+    opacity: 1;
+    transform: translateY(10px); } }
+/* End the sign_up.php style*/
+/*start the profile.php syle*/
+.navbar {
+  background: #117a8b; }
+  .navbar ul:first-of-type {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px; }
+    .navbar ul:first-of-type li {
+      font-size: 18px;
+      padding: 10px 20px;
+      text-transform: capitalize;
+      margin-top: 2px; }
+      .navbar ul:first-of-type li a {
+        color: white; }
+  .navbar .container .list {
+    float: right; }
+    .navbar .container .list ul {
+      margin: 0px;
+      padding: 0px; }
+      .navbar .container .list ul li {
+        float: left;
+        font-size: 18px;
+        padding: 10px 20px;
+        text-transform: capitalize;
+        margin-top: 2px; }
+        .navbar .container .list ul li:last-of-type {
+          background: #403030; }
+        .navbar .container .list ul li a {
+          color: white; }
+
+.container .image {
+  display: inline-block; }
+  .container .image .img {
+    width: 100%;
+    height: 250px;
+    margin-bottom: 10px; }
+    .container .image .img img {
+      width: 100%;
+      height: 100%;
+      border-radius: 4px; }
+  .container .image button {
+    width: 100%;
+    text-transform: capitalize; }
+  .container .image h3 {
+    text-transform: capitalize; }
+.container .content {
+  display: inline-block; }
+  .container .content ul li {
+    float: left;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: 100; }
+    .container .content ul li a {
+      color: black; }
+  .container .content .overview .name_project {
+    margin-bottom: 10px;
+    border-bottom: 1px solid;
+    padding: 0px 10px; }
+    .container .content .overview .name_project h3 {
+      color: deepskyblue; }
+    .container .content .overview .name_project h4 {
+      text-transform: capitalize;
+      padding: 0px 10px; }
+  .container .content .overview .team {
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    border-bottom: 1px solid; }
+    .container .content .overview .team h3 {
+      color: deepskyblue; }
+    .container .content .overview .team h4 {
+      padding: 0px 20px; }
+  .container .content .overview .tasks_of_project h3 {
+    color: deepskyblue; }
+  .container .content .overview .tasks_of_project h4 {
+    padding: 0px 20px;
+    text-transform: capitalize; }
+
+.container .tasks h3 {
+  text-transform: capitalize; }
+.container .tasks p {
+  padding: 0px 25px;
+  font-size: 18px; }
+
+.container .form_log_in {
+  width: 38%;
+  margin: auto;
+  background: #031641;
+  color: white;
+  border-radius: 5px;
+  padding: 17px;
+  margin-top: 47px; }
+  .container .form_log_in form .form-gruop:first-of-type {
+    text-align: center;
+    text-transform: capitalize; }
+    .container .form_log_in form .form-gruop:first-of-type h2 {
+      margin: 0px; }
+
+.container .form_forget_password {
+  width: 38%;
+  margin: auto;
+  background: #031641;
+  color: white;
+  border-radius: 5px;
+  padding: 17px;
+  margin-top: 47px; }
+  .container .form_forget_password form .form-gruop {
+    overflow: hidden; }
+    .container .form_forget_password form .form-gruop:first-of-type {
+      text-align: center;
+      text-transform: capitalize; }
+      .container .form_forget_password form .form-gruop:first-of-type h2 {
+        margin: 15px 0px; }
+  .container .form_forget_password form .btn-danger {
+    float: left; }
+  .container .form_forget_password form .btn-primary {
+    float: right; }
+
+/*# sourceMappingURL=main.css.map */

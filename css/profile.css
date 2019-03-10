@@ -1,0 +1,90 @@
+body {
+  background-color: #f1f5fb !important; }
+
+* {
+  box-sizing: border-box; }
+
+.navbar {
+  background: #117a8b; }
+  .navbar ul:first-of-type {
+    display: inline-block;
+    margin: 0px;
+    padding: 0px; }
+    .navbar ul:first-of-type li {
+      font-size: 18px;
+      padding: 10px 20px;
+      text-transform: capitalize;
+      margin-top: 2px; }
+      .navbar ul:first-of-type li a {
+        color: white; }
+  .navbar .container .list {
+    float: right; }
+    .navbar .container .list ul {
+      margin: 0px;
+      padding: 0px; }
+      .navbar .container .list ul li {
+        float: left;
+        font-size: 18px;
+        padding: 10px 20px;
+        text-transform: capitalize;
+        margin-top: 2px; }
+        .navbar .container .list ul li:last-of-type {
+          background: #403030; }
+        .navbar .container .list ul li a {
+          color: white; }
+
+.container .image {
+  display: inline-block; }
+  .container .image .img {
+    width: 100%;
+    height: 250px;
+    margin-bottom: 10px; }
+    .container .image .img img {
+      width: 100%;
+      height: 100%;
+      border-radius: 4px; }
+  .container .image button {
+    width: 100%;
+    text-transform: capitalize; }
+  .container .image h3 {
+    text-transform: capitalize; }
+.container .content {
+  display: inline-block; }
+  .container .content ul li {
+    float: left;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-transform: capitalize;
+    font-weight: 100; }
+    .container .content ul li a {
+      color: black; }
+  .container .content .overview .name_project {
+    margin-bottom: 10px;
+    border-bottom: 1px solid;
+    padding: 0px 10px; }
+    .container .content .overview .name_project h3 {
+      color: deepskyblue; }
+    .container .content .overview .name_project h4 {
+      text-transform: capitalize;
+      padding: 0px 10px; }
+  .container .content .overview .team {
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    border-bottom: 1px solid; }
+    .container .content .overview .team h3 {
+      color: deepskyblue; }
+    .container .content .overview .team h4 {
+      padding: 0px 20px; }
+  .container .content .overview .tasks_of_project h3 {
+    color: deepskyblue; }
+  .container .content .overview .tasks_of_project h4 {
+    padding: 0px 20px;
+    text-transform: capitalize; }
+
+.container .tasks h3 {
+  text-transform: capitalize; }
+.container .tasks p {
+  padding: 0px 25px;
+  font-size: 18px; }
+
+/*# sourceMappingURL=profile.css.map */
