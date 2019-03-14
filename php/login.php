@@ -1,4 +1,10 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+?>
+<?php
 class login
 {
     private $email;
@@ -128,7 +134,7 @@ class login
           return "special";
         }
         else
-            return "good";
+            return "done";
     }
     private function have_space($string)
     {
@@ -157,6 +163,103 @@ class login
             
             return $id;
     }
+    public function send_mail($email , $htmlmsg){
+        
+        
+        $mail = new PHPMailer();
+        
+        //Enable SMTP debugging.
+        $mail->SMTPDebug = 2;
+        //Set PHPMailer to use SMTP.
+        $mail->isSMTP();
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+        // //Set SMTP host name
+        $mail->Host = "smtp.gmail.com";
+        //Set this to true if SMTP host requires authentication to send email
+        $mail->SMTPAuth = true;
+        // //Provide username and password
+        $mail->Username = "abanoubtalaat50@gmail.com";
+        $mail->Password = "rzbkzfriedbwfyfp";
+        //If SMTP requires TLS encryption then set it
+        $mail->SMTPSecure = "ssl";
+        // //Set TCP port to connect to
+        $mail->Port = 465;
+        
+        $mail->From = 'intershipc@gmail.com';//company
+        $mail->FromName = 'intership company';
+        
+        $mail->addAddress($email, 'abanoub');
+        $mail->AddReplyTo('intershipc@gmail.com','intership');
+        $mail->isHTML(true);
+        
+        $mail->Subject ='signup';
+        $mail->Body = $htmlmsg;
+        
+        $mail->send();
+        
+    }
+    public function store_code_into_signup($email,$code )
+    {
+        $update = 'UPDATE signup SET code =' .$code . ' WHERE email="'.$email .'"';
+        $this->con->query($update);
+    }
+    public function get_code_from_signup($email)
+    {
+        $select = "SELECT code FROM signup WHERE email='" .$email ."'";
+        $res = $this->con->query($select);
+        
+        if($res->num_rows ==1)
+        {
+            while($row = $res->fetch_assoc())
+            {
+                return $row['code'];
+            }
+        }
+    }
+    public function reset_password($email , $new_password)
+    {
+        if($this->check_pass($new_password) == "done")
+        {
+            $update1 = 'UPDATE signup SET password="' . $new_password . '" WHERE email ="' .$email.'"';
+            $update2 = 'UPDATE login SET password="' . $new_password . '" WHERE email ="' .$email.'"';
+            $update3 = 'UPDATE signup SET code=0 WHERE email ="' .$email.'"';
+            
+            $this->con->query($update1);
+            $this->con->query($update2);
+            $this->con->query($update3);
+            
+            return "done";
+            
+        }
+        else
+        {
+            return $this->check_pass($new_password);
+        }
+    }
+    private function get_pass_error($pass)//here no errors but we want to make sure that the pass is strong
+    {
+        if(strlen($pass) >= 8)
+        {
+            if($this->have_num($pass))
+            {
+                return "done";
+            }
+            else if($this->have_num($this->pass) !== true)
+            {
+                return  "Put At Least One Number In Your Password";
+            }
+        }
+        else
+            return "Enter 8 Digit At Least In Your Password";
+            
+           
+    }
     
 }
 ?>
@@ -179,9 +282,16 @@ class login
  *  
  *  
  */
+$login = new login("localhost" , "root" , "","project");
+
+/*
+ * 
+ * if you send request to this page and send email and password so you want do validation
+ * and login on website
+ */
 if(isset($_POST['email']) && isset($_POST['password']))
 {
-    $login = new login("localhost" , "root" , "","project");
+   
 
     $username = $_POST['email'];
     $password = $_POST['password'];
@@ -214,5 +324,68 @@ if(isset($_POST['email']) && isset($_POST['password']))
     }
         
         
+}
+/*
+ * if you send email and fun variables and fun == send_code so you want send email when user forget password
+ * 
+ * and this page will not send any response text
+ */
+else if(isset($_POST['email']) && isset($_POST['fun']))
+{
+   
+    if($_POST['fun'] == "send_code")
+    {
+       
+        $code = rand(10000000 , 100000000);
+        
+        $login->store_code_into_signup($_POST['email'], $code);
+        
+        $htmlmsg = "<h2>hello</h2><h2>your email used to change your password on intership website  </h2><h2>Enter this code { ".$code." } on <a href='#'>Reset Password Page</a></h2>";
+        
+        $login->send_mail($_POST['email'], $htmlmsg);
+        
+        
+    }
+}
+/*
+ * if you send email and code and fun vaiables and fun == check_code so you want to check if code right or not 
+ * 
+ * so if right this page will send done
+ * 
+ * and if wrong this page will return Wrong Code
+ */
+else if(isset($_POST['email']) && isset($_POST['code']) && isset($_POST['fun']))
+{
+    if($_POST['fun'] == "check_code")
+    {
+        $code = $login->get_code_from_signup($_POST['email']);
+        
+        if($code == $_POST['code'])
+            echo "done";
+        else 
+            echo "Wrong Code";
+    }
+}
+/*
+ * if you send email and new_password and fun == change_password so you want change password 
+ * 
+ * this page will return done if the password strong 
+ * 
+ * and if the password week this page will return the error on new_password
+ */
+else if(isset($_POST['email']) && isset($_POST['new_password']) && isset($_POST['fun']))
+{
+    if($_POST['fun'] == "change_password")
+    {
+        $response = $login->reset_password($_POST['email'], $_POST['new_password']);
+        if($response == "done")
+        {
+            echo "done";
+        }
+        else
+        {
+            echo $response;
+        }
+    }
 }
 ?>
