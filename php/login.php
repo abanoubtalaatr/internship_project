@@ -31,7 +31,7 @@ class login
             $email = $this->con->real_escape_string($this->email);
             if ($this->email_found($this->email) == true)//first check if email founded in database or not
             {
-                if ($this->check_pass($this->pass) == "good")//if pass just number and chars
+                if ($this->check_pass($this->pass) == "done")//if pass just number and chars
                 {
                     $select = $this->con->query("SELECT  password FROM login WHERE email ='" . $email . "' AND password ='" . $this->pass . "'");
 
