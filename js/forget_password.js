@@ -4,15 +4,27 @@ let forget_password = document.getElementById('forget_password'),
    
 
 forget_password.onclick = function(evt){
-	if(document.querySelectorAll('.form-group #exampleInputEmail1')[0].value !==''){
-	    alert_class[0].style.display = 'block';
+	if(document.querySelectorAll('.form-group #exampleInputEmail1')[0].value !=='')
+	{
+	   
+	    var email = document.querySelectorAll('.form-group #exampleInputEmail1')[0].value;
+		
+	    let req = new XMLHttpRequest();
+        req.onreadystatechange = function()
+        {
+            if (req.status === 200 && req.readyState === 4)
+            {
+                if (req.responseText != "")
+                {
+                	window.location.assign("../html/reset_password.php?email=" + email); 
+
+                }
+            }
+        };
+        req.open("POST", "../php/login.php", true);
+        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        req.send("email=" + email + "&fun=send_code");
+	    
 	}
 
-    window.setTimeout(function(){
-       alert_class[0].textContent = 'you will redirect now';
-        window.location.href = "reset_password.php";
-
-    }, 6000);
-
 }
-
