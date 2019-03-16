@@ -1,12 +1,7 @@
-CREATE TABLE signup
+CREate TABLE login
 (
-    id         INT(6)      AUTO_INCREMENT PRIMARY KEY,
-    first_name varchar(20) NOt NULL,
-    last_name  varchar(20) NOT NULL,
-    email      varchar(50) NOT NULL,
-    password   varchar(50) NOT NULL,
-    gender     varchar(6) NOT NULL,
-    country    varchar(20) NOT NULL
+	email varchar(50) NOT NULL,
+	password varchar(50) NOT NULL
 );
 CREATE TABLE signup
 (
