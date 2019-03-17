@@ -1,30 +1,22 @@
 <?php
-
 class sign_up
 {
     private $con;
-
     private $fn;
     private $fn_error;
-
     private $ln;
     private $ln_error;
-
     private $email;
     private $email_error;
-
     private $pass;
     private $pass_error;
     
     private $repass;
     private $repass_error;
     
-
     private $gender;
     private $country;
-
     private $error_arr = array();
-
     public function sign_up($server_name , $db_user , $db_pass , $db_name)
     {
         $this->con = new mysqli($server_name , $db_user , $db_pass , $db_name);
@@ -42,7 +34,6 @@ class sign_up
         if($this->is_email($this->email,'gmail.com') || $this->is_email($this->email , "yahoo.com"))
         {
             
-
             if($this->get_first_name_error() == "good" && $this->get_last_name_error() == "good" && $this->get_email_error() == "good" && $this->get_pass_error() == "good" && $this->get_repass_error() == "good")
             {
                 //here we will store all user data
@@ -52,15 +43,12 @@ class sign_up
                 $this->ln = $this->con->real_escape_string($this->ln);
                 $this->email = $this->con->real_escape_string($this->email);
                 $this->pass = $this->con->real_escape_string($this->pass);
-
                 //first we will insert data on sign up table
                 $insert_sign_up = "INSERT INTO signup (first_name , last_name  , email , password , gender , country) VALUES('".$this->fn."' , '". $this->ln ."' ,'".$this->email."', '".$this->pass."', '".$this->gender."' ,'".$this->country."' )";
                 $this->con->query($insert_sign_up);
-
                 //second we will insert some of data on login table
                 $insert_login = "INSERT INTO login ( email , password ) VALUES ('".$this->email."' , '".$this->pass."')";
                 $this->con->query($insert_login);
-
                 $this->error_arr[0] = "done";
             }
             else
@@ -97,23 +85,19 @@ class sign_up
                 }
             }
                 
-
         }
         else
         {
             $this->error_arr[0] = "email";
-            $this->error_arr[1] = "Uncorrect Input Write Vaild Email";
+            $this->error_arr[1] = "Write Vaild Email";
         }
-
         return $this->error_arr;
     }
     
     private function email_found($email)
     {
         $select = 'SELECT email FROM login WHERE email ="' .$email .'"';
-
         $res = $this->con->query($select);
-
         if($res->num_rows == 1)
         {
             return true;
@@ -127,7 +111,6 @@ class sign_up
     {
         if(filter_var($email,FILTER_VALIDATE_EMAIL))
         {
-
             $arr = explode("@",$email);
             if(count($arr) == 2 && $arr[1] == $last_part)
             {
@@ -138,7 +121,6 @@ class sign_up
         }
         else
             return false;
-
     }
     
     private function get_first_name_error()
@@ -217,7 +199,6 @@ class sign_up
             $this->email_error = "Un Correct Input Write Vaild Email";
         }
         
-
         return $this->email_error;
     }
     private function get_pass_error()//here no errors but we want to make sure that the pass is strong
@@ -235,9 +216,7 @@ class sign_up
         }
         else
             $this->pass_error = "Enter 8 Digit At Least In Your Password";
-
         return $this->pass_error;
-
     }
     private function get_repass_error()
     {
@@ -345,9 +324,7 @@ class sign_up
         
         //$birthday = $_POST['year'] . "-" .$_POST['month'] . "-" . $_POST['day'];
         $username = $_POST['email'];
-
         $sign_up = new sign_up("localhost" , "root" , "" , "project");
-
         
         $output =  $sign_up->start_sign_up($_POST['first_name'] , $_POST['last_name'] , $username , $_POST['password'] ,$_POST['confirm_password'] , $_POST['gender'] , $_POST['country']);
         if($output[0] == "done")

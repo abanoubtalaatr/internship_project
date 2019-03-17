@@ -107,10 +107,6 @@ sign_up.html
         padding: 10px 20px;
         text-transform: capitalize;
         margin-top: 2px; }
-        .navbar .container .list ul li:last-of-type {
-          background: #403030; }
-        .navbar .container .list ul li a {
-          color: white; }
 
 .container .image {
   display: inline-block; }
@@ -199,5 +195,17 @@ sign_up.html
     float: left; }
   .container .form_forget_password form .btn-primary {
     float: right; }
+
+.main .container a {
+  color: yellow;
+  text-transform: capitalize; }
+.main .container .collapse {
+  float: right !important; }
+  .main .container .collapse ul li:nth-of-type(3), .main .container .collapse ul li:nth-of-type(4) {
+    padding: 0px;
+    font-size: 14px;
+    padding: 12px; }
+    .main .container .collapse ul li:nth-of-type(3) a, .main .container .collapse ul li:nth-of-type(4) a {
+      color: yellow; }
 
 /*# sourceMappingURL=main.css.map */

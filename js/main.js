@@ -46,20 +46,51 @@ for(let i = 0 ; i < value_of_form.length ; i++ ){
 
 
 // *** End the validation *** // 
+// array of  classes error 
+let error_to_show  = document.getElementsByClassName('error');
 
+let errors = ['first_name','last_name','email','password','repassword'];
 sign_up[0].onclick = function(evt){
 
 	ajaxRequest = new XMLHttpRequest();
 	ajaxRequest.onreadystatechange = function() {
   if(ajaxRequest.readyState == 4 && ajaxRequest.status == 200){
-  	// here to receive the response if no error you will redirect to this page
-	// window.location.replace('php/sign_up.php');
+       // if exsits erorr
+  	if(ajaxRequest.responseText !== 'done'){
+      
+       for(let x = 0 ; x <errors.length ; x++){
+       	  if(ajaxRequest.responseText.includes(errors[x])){
+
+               let reponse_should_write =
+                       ajaxRequest.responseText.replace(errors[x] +':','');
+       	  	for(let i = 0 ; i < error_to_show.length;i++){
+                 error_to_show[i].textContent = '';
+         	  		 let err = errors[x];
+                 if(error_to_show[i].classList.contains(err)){	
+                   
+                   	error_to_show[i].textContent =reponse_should_write;
+                    error_to_show[i].style.display = 'block';
+
+                 }
+       	   	 
+       	     }// end for
+       	  }//end if 
+       }// end for 
+  	   
+  	}// end if  exists error
+
+    // else if every thing is ok you will redirect to profile page
+    else{
+      window.location.assign("../html/profile.php"); 
+    }
+  	  
 		   		   
 	}// end if is set response
   }//onchange
 	let dataForm = new FormData(document.forms[0]);
 	ajaxRequest.open('POST','/internship_project/php/signup.php',true);
 	ajaxRequest.send(dataForm);
+    
 }//end button
 
 

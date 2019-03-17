@@ -310,7 +310,7 @@
 
 			    <div class="col">
 			      <input type="password" class="form-control" placeholder="Confirm password" name="confirm_password">
-			      <div class="error confirm_password">error</div>
+			      <div class="error repassword">error</div>
 			    </div>
                 <div class="col">
                 	<button type="button" class="btn btn-primary" name="sign_up">Sign Up</button>

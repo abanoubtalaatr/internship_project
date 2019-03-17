@@ -26,7 +26,7 @@
       		</li>
 
       		<li> 
-      			<a href="html/sign_up.php">join us</a>
+      			<a href="../html/tasks.php">tasks</a>
       		</li>
 
       	</ul>

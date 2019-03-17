@@ -26,7 +26,7 @@
       		</li>
 
       		<li> 
-      			<a href="html/sign_up.php">join us</a>
+      			<a href="../html/tasks.php">tasks</a>
       		</li>
 
       	</ul>
@@ -59,22 +59,10 @@
 
        <!-- Start overview -->
 		<div class="overview col-md-12">
-			<div class="name_project">
-				<h3>Your project you now work on it </h3>
-				<h4>facebook</h4>
-			</div>
-			<div class="team ">
-				<div class="member_team">
-					<h3>member of team</h3>
-					<h4>abanoub talaat</h4>
-					<h4>bassem reda</h4>
-					<h4>marco shehata</h4>
-					<h4>kerols kamal</h4>
-					<h4>Ezzat zaher</h4>
-				</div>
-			</div>
+			
+			
 			<div class="tasks_of_project">
-				<h3>Tasks in project</h3>
+				<h3>Tasks </h3>
 				<h4>log in </h4>
 				<h4>sign up </h4>
 				<h4>profile</h4>

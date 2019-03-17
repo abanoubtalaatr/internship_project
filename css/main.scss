@@ -136,12 +136,7 @@ sign_up.html
 			padding: 10px 20px;
     		text-transform: capitalize;
     		margin-top: 2px;
-    		&:last-of-type{
-    			background: #403030;
-    		}
-			a{
-				color: white;
-			}
+    		
 		 }// li
 		}//ul
 
@@ -299,3 +294,33 @@ sign_up.html
 	}
     }
 }
+
+
+// style main.php 
+
+.main{
+  .container{
+    a{
+      color: yellow;
+      text-transform: capitalize;
+    }
+    .collapse{
+      float: right !important;
+      ul {
+        li{
+           &:nth-of-type(3),
+           &:nth-of-type(4){
+            padding: 0px;
+            font-size: 14px;
+            padding: 12px;
+            a{
+              color: yellow;
+            }
+           }
+
+        }//li 
+      }// ul 
+     }//.collapse
+  }// container
+  
+}//main
