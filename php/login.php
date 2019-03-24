@@ -169,7 +169,7 @@ class login
         $mail = new PHPMailer();
         
         //Enable SMTP debugging.
-        $mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 0;
         //Set PHPMailer to use SMTP.
         $mail->isSMTP();
         $mail->SMTPOptions = array(
@@ -242,6 +242,12 @@ class login
             return $this->check_pass($new_password);
         }
     }
+    public function clear_code_from_signup($email)
+    {
+        $update = 'UPDATE signup SET code=0 WHERE email="'.$email .'"';
+        $this->con->query($update);
+    }
+    
     private function get_pass_error($pass)//here no errors but we want to make sure that the pass is strong
     {
         if(strlen($pass) >= 8)
@@ -260,6 +266,7 @@ class login
             
            
     }
+    
     
 }
 ?>
@@ -360,10 +367,21 @@ else if(isset($_POST['email']) && isset($_POST['code']) && isset($_POST['fun']))
     {
         $code = $login->get_code_from_signup($_POST['email']);
         
-        if($code == $_POST['code'])
-            echo "done";
-        else 
-            echo "Wrong Code";
+        if($code != 0)
+        {
+            if($code == $_POST['code'])
+            {
+                echo "done";
+                $login->clear_code_from_signup($_POST['email']);
+            }
+            else
+                echo "Wrong Code";
+        }
+        else
+        {
+            echo "curious";
+        }
+       
     }
 }
 /*
