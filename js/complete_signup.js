@@ -16,13 +16,15 @@ check_code.onclick = function (evt){
   	  {
   		window.location.assign("../html/profile.php"); 
   	  }
+	  //if wrong code written
   	  else if(ajaxRequest.responseText == "wrong code")
   	  {
-  		  alert(ajaxRequest.responseText);
+  		  //alert(ajaxRequest.responseText);
   	  }
+	  //if the user come to this page while his email aleardy activation
   	  else if(ajaxRequest.responseText == "curious")
   	  {
-  		  alert("Do Not Try this again");
+  		  //alert("Do Not Try this again");
   	  }
 		   		   
 	}// end if is set response
