@@ -1,4 +1,5 @@
 <?php
+session_start();
 class sign_up
 {
     private $con;
@@ -329,7 +330,7 @@ class sign_up
         $output =  $sign_up->start_sign_up($_POST['first_name'] , $_POST['last_name'] , $username , $_POST['password'] ,$_POST['confirm_password'] , $_POST['gender'] , $_POST['country']);
         if($output[0] == "done")
         {
-            session_start();
+            
             $id = $sign_up->get_id($username);
             $_SESSION['id'] = $id;
             //this cookie will work for year

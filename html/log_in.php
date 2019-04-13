@@ -26,10 +26,11 @@
 				    <input type="checkbox" class="form-check-input" id="exampleCheck1">
 				    <label class="form-check-label" for="exampleCheck1">Member Me</label>
 				  </div>
-				  <button type="submit" class="btn btn-primary">Submit</button>
+				  <button type="submit" class="btn btn-primary" id = 'login'>Submit</button>
 				  <button type="submit" class="btn btn-danger" style="float: right;"><a href="html/forget_password.php" style="color: white;"> Forget password</a> </button> 
 			</form>
 		</div> <!-- End the form-log_in  -->
 	</div> <!-- End the container -->
+	<script type="text/javascript" src="../js/login.js"></script>
 </body>
 </html>

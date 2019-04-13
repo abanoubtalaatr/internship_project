@@ -166,7 +166,7 @@ sign_up.html
 		h3{
 			text-transform:capitalize;
 		}
-	}
+	}//image
 	.content{
 		
 		display: inline-block;
@@ -182,44 +182,90 @@ sign_up.html
 			}
 		}
        .overview{
+        .row{
+          overflow: hidden; 
+          border-top: 3px solid #0055d9;
+          padding-top: 20px;
+          border-left: 1px dashed;
+          border-right: 1px dashed ;
+          border-bottom: 1px dashed;
+          padding: 17px;
+          background: #f7f9ff;
+          margin-bottom: 20px;
 
-       	.name_project{
-            margin-bottom: 10px;
-       	 	border-bottom: 1px solid;
-		    padding: 0px 10px;
-		   
-          h3{
-          	 color: deepskyblue;
+        .general{
+          
+          width: 100px;
+          float: left; 
+          .img{
+            width: 100px ;
+            height: 100px;
+            img{
+              border-radius: 50%;
+            }
+           } //img
+         
+         }// general
+         .info_general{
+            float: left; 
+            margin-left: 10px;
+            padding-left: 25px;
+            color:#0055d9;
+            h3,h4{
+              &:hover a{
+                display: inline-block;
+              }
+              text-transform: capitalize;
+              span{
+                margin-right: 10px;
+                display: inline-block;
+              }
+              a{
+                display: none;
+                color: black;
+              }
 
-          }
-          h4{
-          	text-transform: capitalize;
-          	
-          	padding: 0px 10px;
+            }
+            h4{
+              color:black;
+            }
+            h5{
+              display: inline-block;
+              float: left;padding: 4px 12px;
+              border-radius: 3px; 
+              background: #e6efff;
+              margin-left: 3px
+            }
+         }//info_general
 
-          }
-       	 }//name_project
-       	 .team {
-       	 	text-transform: capitalize;
-       	 	margin-bottom: 10px;
-       	    border-bottom: 1px solid;
-       	 	h3{
-       	 		color: deepskyblue;
-       	 	}
-       	 	h4{
-       	 		padding:0px 20px;
-       	 	}
-       	 }//end team
-       	 .tasks_of_project{
-       	 	h3{
-       	 		color: deepskyblue;
+        }//row 
+          
+       	.row_2{
+          background: #68a4e2;
+          &>i{
+            display: inline-block;
+            margin-right: 15px;
+          }//i
 
-       	 	}
-       	 	h4{
-       	 		padding:0px 20px;
-       	 		text-transform: capitalize;
-       	 	}
-       	 }
+          .contact{
+            width: 100%;
+            .form-control{
+              width: 45%;
+              float: left;
+              margin-bottom: 10px;
+              &:first-of-type{
+                margin-right: 10%;
+              }
+            }//form control
+          }//contact
+          
+          .bio{
+            textarea{
+              max-width: 100%;
+            }
+          }//bio
+        }//row_2
+
        }//overview
 
 
@@ -227,17 +273,114 @@ sign_up.html
 	}// content
 }
 
+//style task page 
 .container{
 	.tasks{
-		h3{
-			text-transform: capitalize;
-		}
-		p{
-			padding: 0px 25px;
-			font-size: 18px;
-		}
-	}
-}
+		.row{
+      overflow: hidden; 
+      border-top: 3px solid #0055d9;
+      padding-top: 20px;
+      border-left: 1px dashed;
+      border-right: 1px dashed ;
+      border-bottom: 1px dashed;
+      padding: 17px;
+      background: rgba(12, 222, 194, 0.94);
+      margin-bottom: 20px;
+      h4{
+        text-transform: capitalize;
+      }//h4
+
+      #start_task{
+        margin-top: 0px;
+      }
+      .contain_span{
+        overflow: hidden;
+        span{
+          padding:5px;
+          color: rgb(0, 20, 51);
+          background: rgb(230, 239, 255);
+          border-radius: 5px;
+
+          &:first-of-type{
+            text-transform: capitalize;
+            float: left;
+            strong{
+              color: blue;
+            }
+          }
+
+          &:last-of-type{
+            float: right;
+            strong{
+              text-transform: capitalize;
+              color: crimson;
+            }
+          }
+
+
+        }//span
+
+      }//contain_span
+      .description{
+         padding: 5px 0px;
+         background: white;
+         margin-top: 15px;
+         border-top: 3px solid;
+
+         span{
+          color: darkblue;
+          margin-left: 23px; 
+          font-size: 20px;
+          text-transform: capitalize;
+          padding:11px 0px 6px 0px;
+          border-bottom: 1px solid;
+          display: inline-block;
+         }
+
+        p{
+          padding: 10px 23px;
+        }//p 
+
+      }//description
+
+      .btn-primary{
+        margin-top: 40px;
+        width: 100px;
+        height: 33px;
+        overflow: hidden;
+        padding: 0px ;
+        line-height: 2;
+        position: relative;
+        input[type='file']{
+           width: 100%;
+           height: 100%;
+           opacity: 0;
+           position: absolute;
+          right: 0;
+          bottom: 0px;
+          right: 0px;
+          left: 0px;
+          z-index: 2;
+        }
+        span{
+           width: 100%;
+           height: 100%;
+           position: absolute;
+           line-height: 2.3;
+           right: 0;
+          bottom: 0px;
+          right: 0px;
+          left: 0px;
+           z-index: 1;
+        }
+      
+      }//btn-primary
+      .upload{
+         float: right;
+      }
+    }//row
+	}//tasks
+}//container
 
 
 // style the log in form 

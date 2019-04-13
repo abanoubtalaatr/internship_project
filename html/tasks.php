@@ -62,8 +62,12 @@
 			<h3>Tasks</h3>
 			<hr style="color:black !important">
 			<div class="task">
-				<h3>make function to get all name in word</h3>
-				<p>this function to get all name in the word ,all name from all nationality and all country </p>
+				<div class="row">
+					<div class="alert alert-danger"> New task wait you</div>
+
+					<button class="btn btn-primary" id = 'start_task'> Start Now</button>
+					
+				</div>
 			</div>
 			
 		</div><!-- End overview -->
@@ -76,6 +80,6 @@
 
 
 
-
+<script type="text/javascript" src="../js/data_of_task.js"></script>
 </body>
 </html>

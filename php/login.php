@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -315,7 +316,7 @@ if(isset($_POST['email']) && isset($_POST['password']))
             
         }
         
-
+       
         echo "done";
     }
     else

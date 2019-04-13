@@ -133,34 +133,140 @@ sign_up.html
     font-weight: 100; }
     .container .content ul li a {
       color: black; }
-  .container .content .overview .name_project {
-    margin-bottom: 10px;
-    border-bottom: 1px solid;
-    padding: 0px 10px; }
-    .container .content .overview .name_project h3 {
-      color: deepskyblue; }
-    .container .content .overview .name_project h4 {
-      text-transform: capitalize;
-      padding: 0px 10px; }
-  .container .content .overview .team {
-    text-transform: capitalize;
-    margin-bottom: 10px;
-    border-bottom: 1px solid; }
-    .container .content .overview .team h3 {
-      color: deepskyblue; }
-    .container .content .overview .team h4 {
-      padding: 0px 20px; }
-  .container .content .overview .tasks_of_project h3 {
-    color: deepskyblue; }
-  .container .content .overview .tasks_of_project h4 {
-    padding: 0px 20px;
-    text-transform: capitalize; }
+  .container .content .overview .row {
+    overflow: hidden;
+    border-top: 3px solid #0055d9;
+    padding-top: 20px;
+    border-left: 1px dashed;
+    border-right: 1px dashed;
+    border-bottom: 1px dashed;
+    padding: 17px;
+    background: #f7f9ff;
+    margin-bottom: 20px; }
+    .container .content .overview .row .general {
+      width: 100px;
+      float: left; }
+      .container .content .overview .row .general .img {
+        width: 100px;
+        height: 100px; }
+        .container .content .overview .row .general .img img {
+          border-radius: 50%; }
+    .container .content .overview .row .info_general {
+      float: left;
+      margin-left: 10px;
+      padding-left: 25px;
+      color: #0055d9; }
+      .container .content .overview .row .info_general h3, .container .content .overview .row .info_general h4 {
+        text-transform: capitalize; }
+        .container .content .overview .row .info_general h3:hover a, .container .content .overview .row .info_general h4:hover a {
+          display: inline-block; }
+        .container .content .overview .row .info_general h3 span, .container .content .overview .row .info_general h4 span {
+          margin-right: 10px;
+          display: inline-block; }
+        .container .content .overview .row .info_general h3 a, .container .content .overview .row .info_general h4 a {
+          display: none;
+          color: black; }
+      .container .content .overview .row .info_general h4 {
+        color: black; }
+      .container .content .overview .row .info_general h5 {
+        display: inline-block;
+        float: left;
+        padding: 4px 12px;
+        border-radius: 3px;
+        background: #e6efff;
+        margin-left: 3px; }
+  .container .content .overview .row_2 {
+    background: #68a4e2; }
+    .container .content .overview .row_2 > i {
+      display: inline-block;
+      margin-right: 15px; }
+    .container .content .overview .row_2 .contact {
+      width: 100%; }
+      .container .content .overview .row_2 .contact .form-control {
+        width: 45%;
+        float: left;
+        margin-bottom: 10px; }
+        .container .content .overview .row_2 .contact .form-control:first-of-type {
+          margin-right: 10%; }
+    .container .content .overview .row_2 .bio textarea {
+      max-width: 100%; }
 
-.container .tasks h3 {
-  text-transform: capitalize; }
-.container .tasks p {
-  padding: 0px 25px;
-  font-size: 18px; }
+.container .tasks .row {
+  overflow: hidden;
+  border-top: 3px solid #0055d9;
+  padding-top: 20px;
+  border-left: 1px dashed;
+  border-right: 1px dashed;
+  border-bottom: 1px dashed;
+  padding: 17px;
+  background: rgba(12, 222, 194, 0.94);
+  margin-bottom: 20px; }
+  .container .tasks .row h4 {
+    text-transform: capitalize; }
+  .container .tasks .row #start_task {
+    margin-top: 0px; }
+  .container .tasks .row .contain_span {
+    overflow: hidden; }
+    .container .tasks .row .contain_span span {
+      padding: 5px;
+      color: #001433;
+      background: #e6efff;
+      border-radius: 5px; }
+      .container .tasks .row .contain_span span:first-of-type {
+        text-transform: capitalize;
+        float: left; }
+        .container .tasks .row .contain_span span:first-of-type strong {
+          color: blue; }
+      .container .tasks .row .contain_span span:last-of-type {
+        float: right; }
+        .container .tasks .row .contain_span span:last-of-type strong {
+          text-transform: capitalize;
+          color: crimson; }
+  .container .tasks .row .description {
+    padding: 5px 0px;
+    background: white;
+    margin-top: 15px;
+    border-top: 3px solid; }
+    .container .tasks .row .description span {
+      color: darkblue;
+      margin-left: 23px;
+      font-size: 20px;
+      text-transform: capitalize;
+      padding: 11px 0px 6px 0px;
+      border-bottom: 1px solid;
+      display: inline-block; }
+    .container .tasks .row .description p {
+      padding: 10px 23px; }
+  .container .tasks .row .btn-primary {
+    margin-top: 40px;
+    width: 100px;
+    height: 33px;
+    overflow: hidden;
+    padding: 0px;
+    line-height: 2;
+    position: relative; }
+    .container .tasks .row .btn-primary input[type='file'] {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      bottom: 0px;
+      right: 0px;
+      left: 0px;
+      z-index: 2; }
+    .container .tasks .row .btn-primary span {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      line-height: 2.3;
+      right: 0;
+      bottom: 0px;
+      right: 0px;
+      left: 0px;
+      z-index: 1; }
+  .container .tasks .row .upload {
+    float: right; }
 
 .container .form_log_in {
   width: 38%;

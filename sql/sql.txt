@@ -14,3 +14,14 @@ CREATE TABLE signup
     counrty    varchar(20) NOT NULL,
     code       INT(10)     NULL
 );
+
+CREATE TABLE tasks
+(
+    id_task        INT(11)      AUTO_INCREMENT PRIMARY KEY,
+    id_for_person int(11)  NULL,
+    description  text NOT NULL,
+    start_task      datetime NOT NULL,
+    end_task    datetime NOT NULL,
+    point     int(11)  NULL,
+   
+);
