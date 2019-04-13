@@ -11,7 +11,7 @@ CREATE TABLE signup
     email      varchar(50) NOT NULL,
     password   varchar(50) NOT NULL,
     gender     varchar(6) NOT NULL,
-    counrty    varchar(20) NOT NULL,
+    country    varchar(20) NOT NULL,
     code       INT(10)     NULL
 );
 

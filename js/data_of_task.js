@@ -71,14 +71,20 @@ start_task.onclick = function (evt){
 				
 				ajaxRequest2 = new XMLHttpRequest();
 			
-				// ajaxRequest.onreadystatechange = function() {
-				//   if(ajaxRequest2.readyState == 4 && ajaxRequest2.status == 200){
-				//   	  if(ajaxRequest2.response =='done'){
-				  	  	 
-				//   	  }
+				ajaxRequest2.onreadystatechange = function() {
+				  if(ajaxRequest2.readyState == 4 && ajaxRequest2.status == 200){
+				  	  if(ajaxRequest2.response ==''){
+				  	  	 tasks[0].removeChild(div_description);
+				  	  	 tasks[0].removeChild(div_span);
+				  	  	 tasks[0].removeChild(form);
+				  	  	 let alert = document.createElement('div');
+				  	  	     alert.innerHTML = 'you will recieve the result within from 1-3 minute';
+				  	  	     alert.setAttribute('class' ,'btn btn-danger');
+				  	  	 tasks[0].appendChild(alert);
+				  	  }
 						   		   
-				// 	}// end if is set response
-				//   }//onchange
+					}// end if is set response
+				  }//onchange
 				
 				let dataForm = new FormData(this.parentNode);
 				ajaxRequest2.open('POST','/internship_project/tasks/manager_tasks.php',true);

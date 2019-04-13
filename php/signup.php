@@ -1,23 +1,40 @@
+<?php 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+?>
 <?php
+<<<<<<< HEAD
 session_start();
+=======
+
+>>>>>>> efc5e46646472a40343ef6725de0d5d613795d8e
 class sign_up
 {
     private $con;
+
     private $fn;
     private $fn_error;
+
     private $ln;
     private $ln_error;
+
     private $email;
     private $email_error;
+
     private $pass;
     private $pass_error;
     
     private $repass;
     private $repass_error;
     
+
     private $gender;
     private $country;
+
     private $error_arr = array();
+
     public function sign_up($server_name , $db_user , $db_pass , $db_name)
     {
         $this->con = new mysqli($server_name , $db_user , $db_pass , $db_name);
@@ -35,6 +52,7 @@ class sign_up
         if($this->is_email($this->email,'gmail.com') || $this->is_email($this->email , "yahoo.com"))
         {
             
+
             if($this->get_first_name_error() == "good" && $this->get_last_name_error() == "good" && $this->get_email_error() == "good" && $this->get_pass_error() == "good" && $this->get_repass_error() == "good")
             {
                 //here we will store all user data
@@ -44,12 +62,20 @@ class sign_up
                 $this->ln = $this->con->real_escape_string($this->ln);
                 $this->email = $this->con->real_escape_string($this->email);
                 $this->pass = $this->con->real_escape_string($this->pass);
+
                 //first we will insert data on sign up table
                 $insert_sign_up = "INSERT INTO signup (first_name , last_name  , email , password , gender , country) VALUES('".$this->fn."' , '". $this->ln ."' ,'".$this->email."', '".$this->pass."', '".$this->gender."' ,'".$this->country."' )";
                 $this->con->query($insert_sign_up);
+
                 //second we will insert some of data on login table
                 $insert_login = "INSERT INTO login ( email , password ) VALUES ('".$this->email."' , '".$this->pass."')";
                 $this->con->query($insert_login);
+
+                //we will send email to user to sure that is his email
+                $code = rand(10000000 , 100000000);
+                $this->store_code_into_signup($this->email, $code);
+                $html_msg = "<h2>Your Email used to Signup on internship website </h2><h2>please inter this code {{".$code."}} into signup page to complete Signup</h2>";
+                $this->send_mail($this->email, $html_msg);
                 $this->error_arr[0] = "done";
             }
             else
@@ -86,19 +112,23 @@ class sign_up
                 }
             }
                 
+
         }
         else
         {
             $this->error_arr[0] = "email";
-            $this->error_arr[1] = "Write Vaild Email";
+            $this->error_arr[1] = "Uncorrect Input Write Vaild Email";
         }
+
         return $this->error_arr;
     }
     
     private function email_found($email)
     {
         $select = 'SELECT email FROM login WHERE email ="' .$email .'"';
+
         $res = $this->con->query($select);
+
         if($res->num_rows == 1)
         {
             return true;
@@ -112,6 +142,7 @@ class sign_up
     {
         if(filter_var($email,FILTER_VALIDATE_EMAIL))
         {
+
             $arr = explode("@",$email);
             if(count($arr) == 2 && $arr[1] == $last_part)
             {
@@ -122,6 +153,7 @@ class sign_up
         }
         else
             return false;
+
     }
     
     private function get_first_name_error()
@@ -200,6 +232,7 @@ class sign_up
             $this->email_error = "Un Correct Input Write Vaild Email";
         }
         
+
         return $this->email_error;
     }
     private function get_pass_error()//here no errors but we want to make sure that the pass is strong
@@ -217,7 +250,9 @@ class sign_up
         }
         else
             $this->pass_error = "Enter 8 Digit At Least In Your Password";
+
         return $this->pass_error;
+
     }
     private function get_repass_error()
     {
@@ -303,6 +338,71 @@ class sign_up
             
             return $id;
     }
+    public function send_mail($email , $htmlmsg){
+        
+        
+        $mail = new PHPMailer();
+        
+        //Enable SMTP debugging.
+        $mail->SMTPDebug = 0;
+        //Set PHPMailer to use SMTP.
+        $mail->isSMTP();
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+        // //Set SMTP host name
+        $mail->Host = "smtp.gmail.com";
+        //Set this to true if SMTP host requires authentication to send email
+        $mail->SMTPAuth = true;
+        // //Provide username and password
+        $mail->Username = "abanoubtalaat50@gmail.com";
+        $mail->Password = "rzbkzfriedbwfyfp";
+        //If SMTP requires TLS encryption then set it
+        $mail->SMTPSecure = "ssl";
+        // //Set TCP port to connect to
+        $mail->Port = 465;
+        
+        $mail->From = 'intershipc@gmail.com';//company
+        $mail->FromName = 'intership company';
+        
+        $mail->addAddress($email, 'abanoub');
+        $mail->AddReplyTo('intershipc@gmail.com','intership');
+        $mail->isHTML(true);
+        
+        $mail->Subject ='signup';
+        $mail->Body = $htmlmsg;
+        
+        $mail->send();
+        
+    }
+    private function store_code_into_signup($email,$code )
+    {
+        $update = 'UPDATE signup SET code =' .$code . ' WHERE email="'.$email .'"';
+        $this->con->query($update);
+    }
+    public function get_code_from_signup($email)
+    {
+        $select = "SELECT code FROM signup WHERE email='" .$email ."'";
+        $res = $this->con->query($select);
+        
+        if($res->num_rows ==1)
+        {
+            while($row = $res->fetch_assoc())
+            {
+                return $row['code'];
+            }
+        }
+    }
+    public function clear_code_from_signup($email)
+    {
+        $update = 'UPDATE signup SET code=0 WHERE email="'.$email .'"';
+        $this->con->query($update);
+    }
+    
 }
 ?>
 <?php
@@ -314,18 +414,25 @@ class sign_up
  * the page will return "done" if data vaild 
  * and if not the page will return errors like this ==> first_name:the error
  *                                              or  ==> last_name:the error
+ *                                              or  ==> email:the error
+ *                                              or  ==> password:the error
+ *                                              or  ==> repassword:the error
+ *                               
  *                                              
  * this page programmed to display first error he found
  * 
- * by this sort first_name , last_name , email , password
+ * by this sort first_name , last_name , email , password , confirm_password
  *
  */
+$sign_up = new sign_up("localhost" , "root" , "" , "project");
     if(isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm_password'])  && isset($_POST['gender']) && isset($_POST['country']))
     {
         
         //$birthday = $_POST['year'] . "-" .$_POST['month'] . "-" . $_POST['day'];
         $username = $_POST['email'];
-        $sign_up = new sign_up("localhost" , "root" , "" , "project");
+
+        
+
         
         $output =  $sign_up->start_sign_up($_POST['first_name'] , $_POST['last_name'] , $username , $_POST['password'] ,$_POST['confirm_password'] , $_POST['gender'] , $_POST['country']);
         if($output[0] == "done")
@@ -342,5 +449,39 @@ class sign_up
             echo  $output[0] . ":" . $output[1];
         }
             
+    }
+    /*
+     * if you send code and email and fun == check_code so you want check the code that we sent it to user on email 
+     * to ensure that he write his email
+     * 
+     * if the code right so this page will return done
+     * 
+     * if not will return wrong code
+     * 
+     * if the code on database == 0 so we do not send any email to him so it maybe hacker and try hack us
+     * 
+     * so this page will return curious
+     */
+    if(isset($_POST['code']) && isset($_POST['email']) && isset($_POST['fun']))
+    {
+        if($_POST['fun'] == "check_code")
+        {
+            $code = $sign_up->get_code_from_signup($_POST['email']);
+            
+            if($code != 0)
+            {
+                if($code == $_POST['code'])
+                {
+                    echo "done";
+                    $sign_up->clear_code_from_signup($_POST['email']);
+                }  
+                else 
+                    echo "Wrong Code";
+            }
+            else
+            {
+                echo "curious";
+            }
+        }
     }
 ?>
