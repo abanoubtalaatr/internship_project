@@ -14,14 +14,31 @@ CREATE TABLE signup
     country    varchar(20) NOT NULL,
     code       INT(10)     NULL
 );
-
-CREATE TABLE tasks
-(
-    id_task        INT(11)      AUTO_INCREMENT PRIMARY KEY,
-    id_for_person int(11)  NULL,
-    description  text NOT NULL,
-    start_task      datetime NOT NULL,
-    end_task    datetime NOT NULL,
-    point     int(11)  NULL,
-   
+CREATE TABLE tasks_degree 
+( 
+	id INT(6) AUTO_INCREMENT PRIMARY KEY,
+	task_1_degree INT(4) DEFAULT 0, 
+	task_1_sent_date DATE , 
+	task_1_recive_date DATE, 
+	task_2_degree INT(4) DEFAULT 0, 
+	task_2_sent_date DATE ,
+	task_2_recive_date DATE,
+	task_3_degree INT(4) DEFAULT 0, 
+	task_3_sent_date DATE , 
+	task_3_recive_date DATE, 
+	task_4_degree INT(4) DEFAULT 0, 
+	task_4_sent_date DATE , 
+	task_4_recive_date DATE, 
+	task_5_degree INT(4) DEFAULT 0, 
+	task_5_sent_date DATE , 
+	task_5_recive_date DATE, 
+	task_6_degree INT(4) DEFAULT 0, 
+	task_6_sent_date DATE , 
+	task_6_recive_date DATE, 
+	task_7_degree INT(4) DEFAULT 0, 
+	task_7_sent_date DATE , 
+	task_7_recive_date DATE, 
+	task_8_degree INT(4) DEFAULT 0 , 
+	task_8_sent_date DATE , 
+	task_8_recive_date DATE 
 );
