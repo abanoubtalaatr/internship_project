@@ -10,13 +10,27 @@ class task_soluation
         $task_name = "task_" . $task_number . ".php";
         $path_file = "../tasks/" . $task_name;
 
+        $degree = array();
+        $user_degree =0;
+        $total_degree =0;
         if($task_number == 1)
         {
-            $this->task_1_correction($path_file);
+           $degree =  $this->task_1_correction($path_file);
+           $user_degree = $degree[0];
+           $total_degree = $degree[1];
+           //next step store degree into database
         }
         else if($task_number == 2)
         {
-            $this->task_2_correction($path_file);
+            $degree = $this->task_2_correction($path_file);
+            $user_degree = $degree[0];
+            $total_degree = $degree[1];
+        }
+        else if($task_number == 3)
+        {
+            $degree = $this->task_3_correction($path_file);
+            $user_degree = $degree[0];
+            $total_degree = $degree[1];
         }
     }
     /*
@@ -65,7 +79,10 @@ class task_soluation
             }
         }
 
-        return $degree;
+        $arr = array();
+        $arr[0] = $degree;//degree
+        $arr[1] = count($wrong);//total degree 
+        return $arr;
     }
     /*
         this secand task
@@ -117,7 +134,63 @@ class task_soluation
                 continue;
             }
         }
-        return degree;
+        $arr = array();
+        $arr[0] = $degree;//degree
+        $arr[1] = count($wrong);//total degree 
+        return $arr;
+    }
+    /*
+        therd task :: email validation
+
+        write class name task contain public function name check_email
+        
+        take one parameter (email)
+        return correct if vaild email and
+                          email is @gmail.com or @yahoo.com
+                          make sure that email do not have any space
+                          make sure that not empty email
+        return wrong if any thing else
+
+    */
+    private function task_3_correction($path_file)
+    {
+        require_once $path_file;
+
+        $task = new task();
+        $wrong = array();
+
+        $wrong[0] = "";//empty
+        $wrong[1] = "bassem reda@gmail.com";//space
+        $wrong[2] = "bassemreda@anything.com";//not gmail or yahoo
+        $wrong[3] = "bassem#gmail.com";//# not @
+        $wrong[4] = "bassem@gmail.com@gmail.com";//@gmail.com written two times
+        $wrong[5] = "bassem@gmailcom";
+        $correct = array();
+
+        $correct[0] = "bassemreda55@gmail.com";
+        $correct[1] = "abanoub@yahoo.com";
+        $correct[2] = "bassem@yahoo.com";
+        $correct[3] = "abanoub@gmail.com";
+        $correct[4] = "kero@yahoo.com";
+        $correct[5] = "marco@gmail.com";
+
+        $degree = 0;
+        for($i=0;$i<count($wrong);$i++)
+        {
+            if($task->check_name($wrong[$i]) == "wrong" && $task->check_name($correct[$i]) == "correct")
+            {
+                $degree++;
+            }
+            else if($task->check_name($wrong[$i]) == "correct" || $task->check_name($correct[$i]) == "wrong")
+            {
+                continue;
+            }
+        }
+        $arr = array();
+        $arr[0] = $degree;//degree
+        $arr[1] = count($wrong);//total degree 
+        return $arr;
+
     }
 
 }
