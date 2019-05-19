@@ -5,12 +5,6 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 ?>
 <?php
-<<<<<<< HEAD
-session_start();
-=======
-
->>>>>>> efc5e46646472a40343ef6725de0d5d613795d8e
-class sign_up
 {
     private $con;
 
@@ -70,6 +64,9 @@ class sign_up
                 //second we will insert some of data on login table
                 $insert_login = "INSERT INTO login ( email , password ) VALUES ('".$this->email."' , '".$this->pass."')";
                 $this->con->query($insert_login);
+
+                $insert_tasks_degree = "INSERT INTO tasks_degree (id) VALUES ('".$id."')";
+                $this->con->query($insert_tasks_degree);
 
                 //we will send email to user to sure that is his email
                 $code = rand(10000000 , 100000000);
