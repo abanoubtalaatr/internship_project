@@ -6,21 +6,68 @@ class task_soluation
     {
         $this->con = new mysqli($server_name , $db_user , $db_pass , $db_name);
     }
-    public function correct_this($task_number , $id)
+    public function get_result($task_number , $id)
     {
-        $task_name = "task_" . $task_number . ".php";
+        
+        $select = "SELECT task_".$task_number."_degree , task_".$task_number."_total_degree FROM tasks_degree WHERE id='" . $id . "'";
+        $res = $this->con->query($select);
+
+        if($res->num_rows == 1)
+        {
+            while($row = $res->fetch_assoc())
+            {
+                $degree = $row["task_".$task_number."_degree"];
+                $total_degree = $row["task_".$task_number."_total_degree"];
+                if($degree == 0 && $total_degree == 0)
+                {
+                    //it is meaning that is error on the structure of file
+
+                    return "Error on the structure of file";
+                }
+                else if($total_degree > 0)
+                {
+                    //here every thing good we will return the degree with percentage
+                    if($degree > 0)
+                        $result = ( $degree / $total_degree ) * 100;
+                    else
+                        $result = 0;
+
+                    return $result;
+                }
+            }
+        }     
+        
+    }
+    
+    public function correct_this($task_number , $id , $recive_date_of_tak)
+    {
+        
+        $task_name = $id . "_task_" . $task_number . ".php";
         $path_file = "../tasks/" . $task_name;
 
         $degree = array();
         $user_degree =0;
         $total_degree =0;
+
+        //first we will store in database that the user recive a task
+        $insert = "UPDATE tasks_degree SET task_".$task_number."_recive_date='" . $recive_date_of_tak."' WHERE id='" . $id . "'";
+        $this->con->query($insert);
+
         if($task_number == 1)
         {
+            
            $degree =  $this->task_1_correction($path_file);
            $user_degree = $degree[0];
            $total_degree = $degree[1];
-           
-           $update = "UPDATE tasks_degree SET task_1_degree = '".$user_degree."' , task_1_total_degree = '".$total_degree."'  WHERE  id = '".$id."' ;
+           $error = $degree[2];
+
+            $notes = "[";
+            for($i=0;$i<count($error);$i++)
+            {
+                $notes .= "(" .$error[$i] . ") , ";
+            }
+            $notes .= "]";
+           $update = "UPDATE tasks_degree SET task_1_degree = '".$user_degree."' , task_1_total_degree ='".$total_degree."' , task_1_notes ='".$notes."' WHERE  id ='".$id."'" ;
         
            $this->con->query($update);
         }
@@ -29,8 +76,14 @@ class task_soluation
             $degree = $this->task_2_correction($path_file);
             $user_degree = $degree[0];
             $total_degree = $degree[1];
-
-            $update = "UPDATE tasks_degree SET task_2_degree = '".$user_degree."' , task_2_total_degree = '".$total_degree."'  WHERE  id = '".$id."' ;
+            $error = $degree[2];
+            $notes = "[";
+            for($i=0;$i<count($error);$i++)
+            {
+                $notes .= "(" .$error[$i] . ") , ";
+            }
+            $notes .= "]";
+            $update = "UPDATE tasks_degree SET task_2_degree ='" . $user_degree."' , task_2_total_degree = '".$total_degree."' , task_2_notes ='".$notes."'  WHERE  id='".$id . "'";
         
            $this->con->query($update);
             
@@ -40,18 +93,31 @@ class task_soluation
             $degree = $this->task_3_correction($path_file);
             $user_degree = $degree[0];
             $total_degree = $degree[1];
-
-            $update = "UPDATE tasks_degree SET task_3_degree = '".$user_degree."' , task_3_total_degree = '".$total_degree."'  WHERE  id = '".$id."' ;
+            $error = $degree[2];
+            $notes = "[";
+            for($i=0;$i<count($error);$i++)
+            {
+                $notes .= "(" .$error[$i] . ") , ";
+            }
+            $notes .= "]";
+            $update = "UPDATE tasks_degree SET task_3_degree = '".$user_degree."' , task_3_total_degree = '".$total_degree."' , task_3_notes ='".$notes."'  WHERE  id = '".$id."'" ;
         
            $this->con->query($update);
         }
         else if($task_number == 4)
         {
+
             $degree = $this->task_4_correction($path_file);
             $user_degree = $degree[0];
             $total_degree = $degree[1];
-
-            $update = "UPDATE tasks_degree SET task_4_degree = '".$user_degree."' , task_4_total_degree = '".$total_degree."'  WHERE  id = '".$id."' ;
+            $error = $degree[2];
+            $notes = "[";
+            for($i=0;$i<count($error);$i++)
+            {
+                $notes .= "(" .$error[$i] . ") , ";
+            }
+            $notes .= "]";
+            $update = "UPDATE tasks_degree SET task_4_degree = '".$user_degree."' , task_4_total_degree = '".$total_degree."' , task_1_notes ='".$notes."'  WHERE  id = '".$id."'" ;
         
            $this->con->query($update);
         }
@@ -84,27 +150,41 @@ class task_soluation
         $correct = array();
         $correct[0] = "abanoub";
         $correct[1] = "ali";
-        $correct[2] = "kero";
-        $correct[3] = "bassem";
-        $correct[4] = "namewithoutspace";
-        $correct[5] = "namewithouttag";
+        $correct[2] = "bassem";
+
+        $notes = array();
+        $counter = 0;
 
         $degree = 0;
         for($i=0;$i<count($wrong);$i++)
         {
-            if($task->check_name($wrong[$i]) == "wrong" && $task->check_name($correct[$i]) == "correct")
+            if($task->check_name($wrong[$i]) === "wrong")
             {
                 $degree++;
             }
-            else if($task->check_name($wrong[$i]) == "correct" || $task->check_name($correct[$i]) == "wrong")
+            else if($task->check_name($wrong[$i]) === "correct")
             {
-                continue;
+                $notes[$counter] = $wrong[$i];
+                $counter++;
+            }   
+        }
+        for($i=0;$i<count($correct);$i++)
+        {
+            if($task->check_name($correct[$i]) === "correct")
+            {
+                $degree++;
+            }
+            else if($task->check_name($correct[$i]) === "wrong")
+            {
+                $notes[$counter] = $wrong[$i];
+                $counter++;
             }
         }
 
         $arr = array();
         $arr[0] = $degree;//degree
-        $arr[1] = count($wrong);//total degree 
+        $arr[1] = count($wrong) + count($correct);//total degree 
+        $arr[2] = $notes;
         return $arr;
     }
     /*
@@ -141,25 +221,41 @@ class task_soluation
         $correct[0] = "01201873616";
         $correct[1] = "01102764837";
         $correct[2] = "01098237673";
-        $correct[3] = "01202873616";
-        $correct[4] = "01101287636";
-        $correct[5] = "01002873616";
+       
+        $degree = 0;
+        $notes = array();
+        $counter = 0;
 
         $degree = 0;
         for($i=0;$i<count($wrong);$i++)
         {
-            if($task->check_name($wrong[$i]) == "wrong" && $task->check_name($correct[$i]) == "correct")
+            if($task->check_phonenumber($wrong[$i]) == "wrong")
             {
                 $degree++;
             }
-            else if($task->check_name($wrong[$i]) == "correct" || $task->check_name($correct[$i]) == "wrong")
+            else if($task->check_phonenumber($wrong[$i]) == "correct")
             {
-                continue;
+                $notes[$counter] = $wrong[$i];
+                $counter++;
+            }   
+        }
+        for($i=0;$i<count($correct);$i++)
+        {
+            if($task->check_phonenumber($correct[$i]) == "correct")
+            {
+                $degree++;
+            }
+            else if($task->check_phonenumber($correct[$i]) == "wrong")
+            {
+                $notes[$counter] = $wrong[$i];
+                $counter++;
             }
         }
+
         $arr = array();
         $arr[0] = $degree;//degree
-        $arr[1] = count($wrong);//total degree 
+        $arr[1] = count($wrong) + count($correct);//total degree 
+        $arr[2] = $notes;
         return $arr;
     }
     /*
@@ -193,25 +289,40 @@ class task_soluation
         $correct[0] = "bassemreda55@gmail.com";
         $correct[1] = "abanoub@yahoo.com";
         $correct[2] = "bassem@yahoo.com";
-        $correct[3] = "abanoub@gmail.com";
-        $correct[4] = "kero@yahoo.com";
-        $correct[5] = "marco@gmail.com";
+
+        $notes = array();
+        $counter = 0;
 
         $degree = 0;
         for($i=0;$i<count($wrong);$i++)
         {
-            if($task->check_name($wrong[$i]) == "wrong" && $task->check_name($correct[$i]) == "correct")
+            if($task->check_email($wrong[$i]) == "wrong")
             {
                 $degree++;
             }
-            else if($task->check_name($wrong[$i]) == "correct" || $task->check_name($correct[$i]) == "wrong")
+            else if($task->check_email($wrong[$i]) == "correct")
             {
-                continue;
+                $notes[$counter] = $wrong[$i];
+                $counter++;
+            }   
+        }
+        for($i=0;$i<count($correct);$i++)
+        {
+            if($task->check_email($correct[$i]) == "correct")
+            {
+                $degree++;
+            }
+            else if($task->check_email($correct[$i]) == "wrong")
+            {
+                $notes[$counter] = $wrong[$i];
+                $counter++;
             }
         }
+
         $arr = array();
         $arr[0] = $degree;//degree
-        $arr[1] = count($wrong);//total degree 
+        $arr[1] = count($wrong) + count($correct);//total degree 
+        $arr[2] = $notes;
         return $arr;
 
     }
@@ -234,11 +345,11 @@ class task_soluation
 
         
     */
-    public function task_4_correction($path_file)
+    private function task_4_correction($path_file)
     {
         require_once $path_file;
 
-        $task = new task("localhost","root" , "" , "company");
+        $task = new task();
 
         $correct_name = array();
         $correct_name[0] = "abanoub";
@@ -294,18 +405,33 @@ class task_soluation
             $result_correct = $task->signup($correct_name[$i] , $correct_name[$i] , $correct_email[$i] , $correct_password[$i]);
             $result_wrong   = $task->signup($wrong_name[$i] , $wrong_name[$i] , $wrong_email[$i] , $wrong_password[$i]);
 
-            if($result_wrong == "wrong" && $result_correct == "correct")
+            $notes = array();
+            $counter = 0;
+            if($result_wrong == "wrong")
             {
                 $degree++;
             }
-            else if($result_wrong == "correct" || $result_correct == "wrong")
+            else
             {
-                continue;
+                $notes[$counter] =  "(".$wrong_name[$i]." , ".$wrong_name[$i]." , ".$wrong_email[$i]."  , ".$wrong_password[$i].")";
+                $counter++;
             }
+
+            if($result_correct == "correct")
+            {
+                $degree++;
+            }
+            else if($result_correct == "wrong")
+            {
+                $notes[$counter] =  "(".$correct_name[$i]." , ".$correct_name[$i]." , ".$correct_email[$i]."  , ".$correct_password[$i].")";
+                $counter++;
+            }
+            
         }
         $arr = array();
         $arr[0] = $degree;//degree
-        $arr[1] = count($wrong_email);//total degree 
+        $arr[1] = count($wrong) + count($correct);//total degree 
+        $arr[2] = $notes;
         return $arr;
        
     }
@@ -313,12 +439,28 @@ class task_soluation
 }
 ?>
 <?php
-    if(isset($_POST['id']) && isset($_POST['task_number']) && isset($_POST['fun']))
+
+/*
+    if you want correct the task go the following steps
+    ==>send first post request with variables id , task_number , fun=="check_task" , recive_date (of task)
+        nothing will return
+    
+    ==>send secand post request with variables id , task_number , fun=="get_result"
+        will return degree with percentage (%) if everything ok
+        will return "Error on the "Error on the structure of file"
+
+*/
+    if(isset($_POST['id']) && isset($_POST['task_number']) && isset($_POST['fun']) && isset($_POST['recive_date']))
     {
         if($_POST['fun'] == "check_task")
         {
             $task = new task_soluation("localhost" , "root" , "" , "project");
-            $task->correct_this($_POST['task_number'] , $_POST['id']);
+            $task->correct_this($_POST['task_number'] , $_POST['id'] , $_POST['recive_date']);
+        }
+        else if($_POST['fun'] == "get_result")
+        {
+            $task = new task_soluation("localhost" , "root" , "" , "project");
+            echo $task->get_result($_POST['task_number'] , $_POST['id']);
         }
     }
 ?>
