@@ -20,7 +20,7 @@ class task
     {
         $this->con = new mysqli($server_name , $db_user , $db_pass , $db_name);
     }
-    public function start_sign_up($first_name , $last_name , $email,$phone_number, $pass , $repass , $age , $country , $table_name)
+    public function signup($first_name , $last_name , $email,$phone_number, $pass , $repass , $age , $country , $table_name)
     {
         $this->fn = $first_name;
         $this->ln = $last_name;
