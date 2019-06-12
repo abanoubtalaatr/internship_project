@@ -1,7 +1,7 @@
 <?php
 class task
 {
-    public function is_phone_number($phone)
+    public function check_phonenumber($phone)
     {
         if(strlen($phone) == 11)
         {
